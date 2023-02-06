@@ -3,17 +3,23 @@
 // import userReducer from "./Ducks/User"
 // import { createStore } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
-import { UserReducer } from "./Reducers/RootReducer";
-import { UserSaga } from "./Sagas/UserSaga";
+import { RootReducer } from "./Reducers/RootReducer";
+import { DeleteUserSaga, GetallUserSaga, UpdateUserSaga, UserSaga } from "./Sagas/UserSaga";
 import createSagaMiddleware from "redux-saga";
 
 
 const sagaMiddleware=createSagaMiddleware();
+const getAllMiddleware=createSagaMiddleware();
+const updatelMiddleware=createSagaMiddleware();
+const deleteMiddleware=createSagaMiddleware();
 
 const store = configureStore({
-    reducer:UserReducer,
-    middleware:()=>[sagaMiddleware]
+    reducer:RootReducer,
+    middleware:()=>[sagaMiddleware,getAllMiddleware,updatelMiddleware,deleteMiddleware]
 });
 
 sagaMiddleware.run(UserSaga);
+getAllMiddleware.run(GetallUserSaga);
+updatelMiddleware.run(UpdateUserSaga);
+deleteMiddleware.run(DeleteUserSaga);
 export default store; 

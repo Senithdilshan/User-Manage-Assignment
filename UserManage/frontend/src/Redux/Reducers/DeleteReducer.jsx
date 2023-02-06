@@ -1,26 +1,28 @@
-import { FAILD_LOGIN, REQ_LOGIN, SUCCESS_LOGIN } from "../Ducks/User";
+import { FAILD_DELETE, REQ_DELETE, SUCCESS_DELETE } from "../Ducks/DeleteUser";
+
+
 
 const initialState = {
     loading: true,
-    log:[],
+    id:[],
     posts: [],
     errors: null,
 };
 
-export const UserReducer = (state = initialState, action) => {
+export const DeleteUserReducer = (state = initialState, action) => {
     switch (action.type) {
-        case REQ_LOGIN:
+        case REQ_DELETE:
             return {
                 ...state,
-                log: action.payload,
+                id: action.payload,
             };
-        case SUCCESS_LOGIN:
+        case SUCCESS_DELETE:
             return {
                 ...state,
                 loading: true,
                 posts: action.payload,
             };
-        case FAILD_LOGIN:
+        case FAILD_DELETE:
             return {
                 ...state,
                 loading: false,

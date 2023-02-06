@@ -1,8 +1,14 @@
 import { combineReducers } from "redux";
-import { UserState } from "./UserReducer";
+import { DeleteUserReducer } from "./DeleteReducer";
+import { GetAllReducer } from "./GetAllReducer";
+import { UpdateUserReducer } from "./UpdateUserReducer";
+import { UserReducer } from "./UserReducer";
 
 
 
-export const UserReducer=combineReducers({
-    user: UserState,
+export const RootReducer=combineReducers({
+    user: UserReducer,
+    getAllUsers:GetAllReducer,
+    updateUser:UpdateUserReducer,
+    deleteUSer:DeleteUserReducer,
 });

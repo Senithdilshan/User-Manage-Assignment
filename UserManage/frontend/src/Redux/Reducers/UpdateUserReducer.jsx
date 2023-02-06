@@ -1,4 +1,5 @@
-import { FAILD_LOGIN, REQ_LOGIN, SUCCESS_LOGIN } from "../Ducks/User";
+import { FAILD_UPDATE, REQ_UPDATE, SUCCESS_UPDATE } from "../Ducks/UpdateUser";
+
 
 const initialState = {
     loading: true,
@@ -7,20 +8,20 @@ const initialState = {
     errors: null,
 };
 
-export const UserReducer = (state = initialState, action) => {
+export const UpdateUserReducer = (state = initialState, action) => {
     switch (action.type) {
-        case REQ_LOGIN:
+        case REQ_UPDATE:
             return {
                 ...state,
                 log: action.payload,
             };
-        case SUCCESS_LOGIN:
+        case SUCCESS_UPDATE:
             return {
                 ...state,
                 loading: true,
                 posts: action.payload,
             };
-        case FAILD_LOGIN:
+        case FAILD_UPDATE:
             return {
                 ...state,
                 loading: false,

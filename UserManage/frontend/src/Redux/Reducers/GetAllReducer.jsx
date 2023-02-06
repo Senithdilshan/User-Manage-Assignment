@@ -1,26 +1,28 @@
-import { FAILD_LOGIN, REQ_LOGIN, SUCCESS_LOGIN } from "../Ducks/User";
+import { FAILD_USER, GET_USER, SUCCESS_USER } from "../Ducks/GetUser";
+
 
 const initialState = {
-    loading: true,
-    log:[],
-    posts: [],
+    loading: false,
+    // data:null,
+    users: [],
     errors: null,
 };
 
-export const UserReducer = (state = initialState, action) => {
+export const GetAllReducer = (state = initialState, action) => {
     switch (action.type) {
-        case REQ_LOGIN:
+        case GET_USER:
+            // console.log("reducer Check",action.data)
             return {
                 ...state,
-                log: action.payload,
+                // data:action.payload,
             };
-        case SUCCESS_LOGIN:
+        case SUCCESS_USER:
             return {
                 ...state,
                 loading: true,
-                posts: action.payload,
+                users: action.payload,
             };
-        case FAILD_LOGIN:
+        case FAILD_USER:
             return {
                 ...state,
                 loading: false,

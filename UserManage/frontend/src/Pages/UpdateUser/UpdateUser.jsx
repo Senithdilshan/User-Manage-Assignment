@@ -3,13 +3,17 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, Form, Input, Space, } from 'antd';
 import { serverUrl } from '../../ServerUrl';
+import { useDispatch } from 'react-redux';
+import { ReqestUpdate } from '../../Redux/Ducks/UpdateUser';
+import { GetUser } from '../../Redux/Ducks/GetUser';
 
 function UpdateUser() {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     const { id } = useParams();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleSubmit = () => {
         const data = {
@@ -17,20 +21,10 @@ function UpdateUser() {
             name: name,
             email: email,
         }
-        console.log(data)
-        axios
-            .put(`${serverUrl}/api/auth/updateUser`, data, {
-                headers: {
-                    "authorization": localStorage.getItem("token")
-                },
-            })
-            .then(res => {
-                navigate('/viewUsers');
-                window.alert('User Update Success!')
-            })
-            .catch(err => {
-                window.alert('User Update failed!');
-            })
+
+        dispatch(ReqestUpdate(data));
+        dispatch(GetUser(token));
+        navigate('/viewUsers');
 
     }
     useEffect(() => {

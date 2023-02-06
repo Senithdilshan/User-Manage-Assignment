@@ -283,7 +283,7 @@ async function UpdateUser(req, res) {
             name: name,
             email: email
         }, { new: true })
-        res.json({
+        res.send({
             name: name,
             email: email
         })

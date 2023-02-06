@@ -5,34 +5,25 @@ import { useNavigate } from 'react-router-dom';
 import './Login.css'
 import { Link } from 'react-router-dom';
 import { serverUrl } from '../../ServerUrl';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ReqestLogin } from '../../Redux/Ducks/User';
-
 //----------------------------------Log In-----------------------------------------------------------
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [loginStatus, setLoginStatus] = useState(false);
-  // const [user , setuser] = useState([])
   const navigate = useNavigate();
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
+  const GotData = useSelector((state) => state.logUser);
 
 
   //--------------------------------Handle Submit-------------------------------------------------------------
   const handleSubmit = () => {
-    // e.preventDefault();
-    // console.log(e);
     const data = {
       email: email,
       password: password,
     }
-    try {
-      dispatch(ReqestLogin());
-      navigate('/viewUsers');
-    } catch (error) {
-      console.log(error);
-    }
-
+    dispatch(ReqestLogin(data));
+    navigate('/viewUsers');
 
     // axios
     //   .post(`${serverUrl}/api/auth/login`, data)
@@ -40,7 +31,7 @@ export default function Login() {
     //     localStorage.setItem("token", "Bearer " + res.data.accessToken)
     //     window.alert('Login Successful');
     //     // dispatch();
-    //     // navigate('/viewUsers');
+    //     navigate('/viewUsers');
     //   })
     //   .catch(err => {
     //     window.alert('Login Failed');
